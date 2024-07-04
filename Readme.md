@@ -23,18 +23,18 @@ This Python script demonstrates how to create and validate JSON Web Tokens (JWTs
    e_keys = RSAKeys.generate_keys()
 
    rsa_encryption = RSAEncryption()
-rsa_signing = RSAAlgorithm(RSAKeys(rsa_keys.pub_key, rsa_keys.pvt_key))
+   rsa_signing = RSAAlgorithm(RSAKeys(rsa_keys.pub_key, rsa_keys.pvt_key))
 
-jwt_builder = JwtBuilder(
-    jre=rsa_encryption,
-    claims=claims_dict,
-    signing_key=rsa_signing.pvt,
-    encrypting_key=e_keys.pub_key,
-    signing=rsa_signing
-)
+   jwt_builder = JwtBuilder(
+       jre=rsa_encryption,
+       claims=claims_dict,
+       signing_key=rsa_signing.pvt,
+       encrypting_key=e_keys.pub_key,
+       signing=rsa_signing
+   )
 
-jwt_token = jwt_builder.build()
+   jwt_token = jwt_builder.build()
 
-decoded_status, decoded_claims = decode_claims(jwt_token, "rsa", rsa_keys.pub_key, e_keys.pvt_key, 1000, rsa_keys.pvt_key)
-if decoded_status == JwtStatus.VALID_OK:
-    print("Decoded Claims:", decoded_claims)
+   decoded_status, decoded_claims = decode_claims(jwt_token, "rsa", rsa_keys.pub_key, e_keys.pvt_key, 1000, rsa_keys.pvt_key)
+   if decoded_status == JwtStatus.VALID_OK:
+       print("Decoded Claims:", decoded_claims)
